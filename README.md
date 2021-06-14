@@ -16,7 +16,7 @@ install.packages("rJava")
 ```
 
 ```bash
-$ git clone 
+$ git clone https://github.com/vega-ai/vietr.git 
 $ R CMD INSTALL --no-multiarch --with-keep.source vietr
 
 
