@@ -20,6 +20,14 @@ $ git clone https://github.com/vega-ai/vietr.git
 $ R CMD INSTALL --no-multiarch --with-keep.source vietr
 ```
 
+NOTE: Because vncorenlp hard-coded the path of model resource you must copy the
+models dir to your new R projects:
+
+```bash
+$ cd vietr 
+$ cp -R models your_r_project_dir 
+```
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
