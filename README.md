@@ -11,8 +11,10 @@
 
 This package requires JDK 1.8+
 
-``` r
-install.packages("rJava")
+```bash
+$ sudo apt install liblzma-dev libpcre2-dev libbz2-dev
+$ sudo R CMD javareconf
+$ Rscript -e 'install.packages("rJava")'
 ```
 
 ```bash
@@ -35,8 +37,9 @@ $ cp -R models your_r_project_dir
 ```{r}
 > library(vietr)
 >
+> v <- vncorenlp$new(c("wseg"))
 > text <- "Ông Nguyễn Khắc Chúc  đang làm việc tại Đại học Quốc gia Hà Nội. Bà Lan, vợ ông Chúc, cũng làm việc tại đây."
-> tks <- tokenize(text)
+> tks <- v$tokenize(text)
 > tks
  [1] "Ông"              "Nguyễn_Khắc_Chúc" "đang"             "làm_việc"         "tại"              "Đại_học"         
  [7] "Quốc_gia"         "Hà_Nội"           "."                "Bà"               "Lan"              ","               
@@ -49,8 +52,9 @@ $ cp -R models your_r_project_dir
 ```{r}
 > library(vietr)
 >
+> v <- vncorenlp$new(c("wseg", "pos"))
 > text <- "Ông Nguyễn Khắc Chúc  đang làm việc tại Đại học Quốc gia Hà Nội. Bà Lan, vợ ông Chúc, cũng làm việc tại đây."
-> tags <- pos_tag(text)
+> tags <- v$pos_tag(text)
 2021-06-21 19:16:30 INFO  WordSegmenter:24 - Loading Word Segmentation model
 2021-06-21 19:16:30 INFO  PosTagger:21 - Loading POS Tagging model
 > tags
@@ -65,12 +69,16 @@ tag  "Np"   "CH"  "R"    "V"        "E"   "P"   "CH"
 ### NER (Memory Greed!!!)
 
 ```{r} 
-# Clean up mem usage first
+> # Clean up mem usage first
 > options(java.parameters = "-Xmx4g")
 > gc()
 > rJava::J("java.lang.Runtime")$getRuntime()$gc()
+>
 > library(vietr)
-> entities <- ner(text)
+>
+> v <- vncorenlp$new(c("wseg", "ner"))
+> text <- "Ông Nguyễn Khắc Chúc  đang làm việc tại Đại học Quốc gia Hà Nội. Bà Lan, vợ ông Chúc, cũng làm việc tại đây."
+> entities <- v$ner(text)
 2021-06-21 19:20:28 INFO  WordSegmenter:24 - Loading Word Segmentation model
 2021-06-21 19:20:28 INFO  NerRecognizer:33 - Loading NER model
 > entities

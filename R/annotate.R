@@ -1,45 +1,50 @@
+#' @export
+vncorenlp <- R6::R6Class('vncorenlp',
+  public = list(
+    annotations = NULL,
+    initialize = function(annotations=c("wseg")) {
+      self$annotations = annotations
+      ann_args <- .jarray(self$annotations)
+      private$pipe = .jnew("vn.pipeline.VnCoreNLP", ann_args)
+      self
+    },
 
-tokenize <- function(sen) {
-  ann_args <- .jarray("wseg")
-  pipe <- .jnew("vn.pipeline.VnCoreNLP", ann_args)
-  ann <- .jnew("vn.pipeline.Annotation", sen)
-  pipe$annotate(ann)
-  words <- ann$getWords()
-  ws <- words$toArray()
-  vapply(.jevalArray(ws),
+    tokenize = function(sen) {
+      ann <- .jnew("vn.pipeline.Annotation", sen)
+      private$pipe$annotate(ann)
+      words <- ann$getWords()
+      ws <- words$toArray()
+      vapply(.jevalArray(ws),
          function(x) {
            .jcall(x, returnSig="S", method="getForm")},
          character(1))
-}
+    },
 
-pos_tag <- function(sen) {
-  ann_args <- .jarray(c("wseg","pos"))
-  pipe <- .jnew("vn.pipeline.VnCoreNLP", ann_args)
-  ann <- .jnew("vn.pipeline.Annotation", sen)
-  pipe$annotate(ann)
-  words <- ann$getWords() #
-  ws <- words$toArray()
-  vapply(.jevalArray(ws),
+    pos_tag = function(sen) {
+      ann <- .jnew("vn.pipeline.Annotation", sen)
+      private$pipe$annotate(ann)
+      words <- ann$getWords() #
+      ws <- words$toArray()
+      vapply(.jevalArray(ws),
          function(x) {
            list(word=.jcall(x, returnSig="S", method="getForm"),
                 tag=.jcall(x, returnSig="S", method="getPosTag"))},
          list(word="", tag=""))
-}
+    },
 
-ner <- function(sen) {
-  ann_args <- .jarray(c("wseg","ner"))
-  pipe <- .jnew("vn.pipeline.VnCoreNLP", ann_args)
-  ann <- .jnew("vn.pipeline.Annotation", sen)
-  pipe$annotate(ann)
-  words <- ann$getWords() #
-  ws <- words$toArray()
-  vapply(.jevalArray(ws),
+    ner = function(sen) {
+      ann <- .jnew("vn.pipeline.Annotation", sen)
+      private$pipe$annotate(ann)
+      words <- ann$getWords() #
+      ws <- words$toArray()
+      vapply(.jevalArray(ws),
          function(x) {
            list(word=.jcall(x, returnSig="S", method="getForm"),
                 ner=.jcall(x, returnSig="S", method="getNerLabel"))},
          list(word="", ner=""))
-}
-
-#gc()
-#J("java.lang.Runtime")$getRuntime()$gc()
+  }),
+  private = list(
+    pipe = NULL
+  )
+)
 
