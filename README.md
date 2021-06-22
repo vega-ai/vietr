@@ -99,4 +99,6 @@ MIT
 
 https://github.com/vncorenlp/VnCoreNLP/blob/master/LICENSE.md 
 
+VnCoreNLP-1.1.1.jar and all model resources in models dir are belong to `VNCoreNLP`
+
 
