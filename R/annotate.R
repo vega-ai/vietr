@@ -42,7 +42,21 @@ vncorenlp <- R6::R6Class('vncorenlp',
            list(word=.jcall(x, returnSig="S", method="getForm"),
                 ner=.jcall(x, returnSig="S", method="getNerLabel"))},
          list(word="", ner=""))
+  },
+
+  dep_parse = function(sen) {
+    ann <- .jnew("vn.pipeline.Annotation", sen)
+    private$pipe$annotate(ann)
+    words <- ann$getWords() #
+    ws <- words$toArray()
+    vapply(.jevalArray(ws),
+           function(x) {
+             list(word=.jcall(x, returnSig="S", method="getForm"),
+                  head=.jcall(x, returnSig="I", method="getHead"),
+                  dep=.jcall(x, returnSig="S", method="getDepLabel"))},
+           list(word="", head="", dep=""))
   }),
+
   private = list(
     pipe = NULL
   )

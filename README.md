@@ -91,6 +91,28 @@ ner  "O"    "O"   "O"    "O"        "O"   "O"   "O"
 > 
 ```
 
+# Dependence Parse
+
+```
+> options(java.parameters = "-Xmx4g")
+> gc()
+> rJava::J("java.lang.Runtime")$getRuntime()$gc()
+>
+> library(vietr)
+>
+> v <- vncorenlp$new(c("wseg", "ner", "pos", "parse"))
+> text <- "Ông Nguyễn Khắc Chúc  đang làm việc tại Đại học Quốc gia Hà Nội. Bà Lan, vợ ông Chúc, cũng làm việc tại đây."
+> v$dep_parse(text)
+     [,1]  [,2]               [,3]   [,4]       [,5]  [,6]      [,7]       [,8]     [,9]    [,10] [,11]  [,12]   [,13] 
+word "Ông" "Nguyễn_Khắc_Chúc" "đang" "làm_việc" "tại" "Đại_học" "Quốc_gia" "Hà_Nội" "."     "Bà"  "Lan"  ","     "vợ"  
+head 4     1                  4      0          4     5         6          6        4       9     1      1       1     
+dep  "sub" "nmod"             "adv"  "root"     "loc" "pob"     "nmod"     "nmod"   "punct" "sub" "nmod" "punct" "nmod"
+     [,14]  [,15]  [,16]   [,17]  [,18]      [,19] [,20] [,21]  
+word "ông"  "Chúc" ","     "cũng" "làm_việc" "tại" "đây" "."    
+head 4      5      1       9      0          9     10    9      
+dep  "nmod" "nmod" "punct" "adv"  "root"     "loc" "pob" "punct"
+```
+
 ## License 
 
 MIT
