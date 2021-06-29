@@ -2,9 +2,26 @@
 vncorenlp <- R6::R6Class('vncorenlp',
   public = list(
     annotations = NULL,
-    initialize = function(annotations=c("wseg")) {
+    initialize = function(annotations=c("wseg", "pos", "ner", "parse")) {
+      ann <- match.arg(annotations)
+      anns <- NULL
+      switch (ann,
+        wseg = {
+          anns <- c("wseg")
+        },
+        pos = {
+          anns <- c("wseg", "pos")
+        },
+        ner = {
+          anns <- c("wseg", "ner")
+        },
+        parse = {
+          anns <- c("wseg", "pos", "ner", "parse")
+        },
+        stop("unrecognized annotation '", ann, "'", call.=FALSE)
+      )
       self$annotations = annotations
-      ann_args <- .jarray(self$annotations)
+      ann_args <- .jarray(anns)
       private$pipe = .jnew("vn.pipeline.VnCoreNLP", ann_args)
       self
     },

@@ -37,7 +37,7 @@ $ cp -R models your_r_project_dir
 ```{r}
 > library(vietr)
 >
-> v <- vncorenlp$new(c("wseg"))
+> v <- vncorenlp$new("wseg")
 > text <- "Ông Nguyễn Khắc Chúc  đang làm việc tại Đại học Quốc gia Hà Nội. Bà Lan, vợ ông Chúc, cũng làm việc tại đây."
 > tks <- v$tokenize(text)
 > tks
@@ -52,7 +52,7 @@ $ cp -R models your_r_project_dir
 ```{r}
 > library(vietr)
 >
-> v <- vncorenlp$new(c("wseg", "pos"))
+> v <- vncorenlp$new("pos")
 > text <- "Ông Nguyễn Khắc Chúc  đang làm việc tại Đại học Quốc gia Hà Nội. Bà Lan, vợ ông Chúc, cũng làm việc tại đây."
 > tags <- v$pos_tag(text)
 2021-06-21 19:16:30 INFO  WordSegmenter:24 - Loading Word Segmentation model
@@ -76,7 +76,7 @@ tag  "Np"   "CH"  "R"    "V"        "E"   "P"   "CH"
 >
 > library(vietr)
 >
-> v <- vncorenlp$new(c("wseg", "ner"))
+> v <- vncorenlp$new("ner")
 > text <- "Ông Nguyễn Khắc Chúc  đang làm việc tại Đại học Quốc gia Hà Nội. Bà Lan, vợ ông Chúc, cũng làm việc tại đây."
 > entities <- v$ner(text)
 2021-06-21 19:20:28 INFO  WordSegmenter:24 - Loading Word Segmentation model
@@ -100,7 +100,7 @@ ner  "O"    "O"   "O"    "O"        "O"   "O"   "O"
 >
 > library(vietr)
 >
-> v <- vncorenlp$new(c("wseg", "ner", "pos", "parse"))
+> v <- vncorenlp$new("parse")
 > text <- "Ông Nguyễn Khắc Chúc  đang làm việc tại Đại học Quốc gia Hà Nội. Bà Lan, vợ ông Chúc, cũng làm việc tại đây."
 > v$dep_parse(text)
      [,1]  [,2]               [,3]   [,4]       [,5]  [,6]      [,7]       [,8]     [,9]    [,10] [,11]  [,12]   [,13] 
