@@ -5,7 +5,7 @@
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-`vietr` is a wrapper of words tokenizer using VNCoreNLP.
+`vietr` is a wrapper of VNCoreNLP.
 
 ## Installation
 
@@ -121,6 +121,6 @@ MIT
 
 https://github.com/vncorenlp/VnCoreNLP/blob/master/LICENSE.md 
 
-VnCoreNLP-1.1.1.jar and all model resources in models dir are belong to `VNCoreNLP`
+VnCoreNLP-1.1.1.jar and all model resources in models dir belongs to `VNCoreNLP`
 
 
