@@ -113,6 +113,29 @@ head 4      5      1       9      0          9     10    9
 dep  "nmod" "nmod" "punct" "adv"  "root"     "loc" "pob" "punct"
 ```
 
+## Run as service 
+
+1. Start server
+```
+$ cd vietr
+$ ln -s models R/models
+$ R -e 'plumber::plumb(file="R/api.R")$run(port=39000)'
+```
+
+2. Request annotation
+
+```
+curl -X POST http://localhost:39000/tokenize -H "content-type: application/json" --data "{\"text\": \"Một lãnh đạo Bệnh viện Đa khoa khu vực Thủ Đức đã xác nhận trên Tuổi trẻ online việc, một người đàn ông dương tính với SARS-CoV-2 đang được điều trị tại Bệnh viện Đa khoa khu vực Thủ Đức (phường Linh Trung, TP Thủ Đức, TP.HCM) đã trốn ra ngoài rồi về nhà ở quận 10\"}" 
+
+{"tokens":["Một","lãnh_đạo","Bệnh_viện","Đa_khoa","khu_vực","Thủ_Đức","đã","xác_nhận","trên","Tuổi_trẻ","online","việc",",","một","người","đàn_ông","dương_tính","với","SARS-CoV","-2","đang","được","điều_trị","tại","Bệnh_viện","Đa_khoa","khu_vực","Thủ_Đức","(","phường","Linh_Trung",",","TP","Thủ_Đức",",","TP.","HCM",")","đã","trốn","ra","ngoài","rồi","về","nhà","ở","quận","10"]}
+```
+
+```
+curl -X POST http://localhost:39000/postag -H "content-type: application/json" --data "{\"text\": \"Một lãnh đạo Bệnh viện Đa khoa khu vực Thủ Đức đã xác nhận trên Tuổi trẻ online việc, một người đàn ông dương tính với SARS-CoV-2 đang được điều trị tại Bệnh viện Đa khoa khu vực Thủ Đức (phường Linh Trung, TP Thủ Đức, TP.HCM) đã trốn ra ngoài rồi về nhà ở quận 10\"}" 
+
+[{"word":"Một","tag":"M"},{"word":"lãnh_đạo","tag":"N"},{"word":"Bệnh_viện","tag":"N"},{"word":"Đa_khoa","tag":"Np"},{"word":"khu_vực","tag":"N"},{"word":"Thủ_Đức","tag":"Np"},{"word":"đã","tag":"R"},{"word":"xác_nhận","tag":"V"},{"word":"trên","tag":"E"},{"word":"Tuổi_trẻ","tag":"N"},{"word":"online","tag":"V"},{"word":"việc","tag":"N"},{"word":",","tag":"CH"},{"word":"một","tag":"M"},{"word":"người","tag":"Nc"},{"word":"đàn_ông","tag":"N"},{"word":"dương_tính","tag":"A"},{"word":"với","tag":"E"},{"word":"SARS-CoV","tag":"Nc"},{"word":"-2","tag":"Np"},{"word":"đang","tag":"R"},{"word":"được","tag":"V"},{"word":"điều_trị","tag":"V"},{"word":"tại","tag":"E"},{"word":"Bệnh_viện","tag":"Np"},{"word":"Đa_khoa","tag":"Np"},{"word":"khu_vực","tag":"N"},{"word":"Thủ_Đức","tag":"Np"},{"word":"(","tag":"CH"},{"word":"phường","tag":"N"},{"word":"Linh_Trung","tag":"Np"},{"word":",","tag":"CH"},{"word":"TP","tag":"Ny"},{"word":"Thủ_Đức","tag":"Np"},{"word":",","tag":"CH"},{"word":"TP.","tag":"Ny"},{"word":"HCM","tag":"Np"},{"word":")","tag":"CH"},{"word":"đã","tag":"R"},{"word":"trốn","tag":"V"},{"word":"ra","tag":"V"},{"word":"ngoài","tag":"N"},{"word":"rồi","tag":"C"},{"word":"về","tag":"V"},{"word":"nhà","tag":"N"},{"word":"ở","tag":"E"},{"word":"quận","tag":"N"},{"word":"10","tag":"M"}]
+```
+
 ## License 
 
 MIT
