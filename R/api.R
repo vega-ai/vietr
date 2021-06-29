@@ -70,5 +70,5 @@ function(req, res, text) {
   if (is.null(dep)) {
     dep <<- vietr::vncorenlp$new("parse")
   }
-  as.data.frame(t(dep$dep(text)))
+  as.data.frame(t(dep$dep_parse(text)))
 }
