@@ -176,15 +176,18 @@ curl -X POST http://localhost:39000/postag -H "content-type: application/json" -
 
 This package has a sample of python client to make annotation request to vncorenlp above. See `vnlp.py`
 
+```python
 >>> import vnlpc
 >>> vc = vnlpc.VNLPClient("http://localhost:39000")
 >>> text = "Ông Nguyễn Khắc Chúc  đang làm việc tại Đại học Quốc gia Hà Nội. Bà Lan, vợ ông Chúc, cũng làm việc tại đây."
+>>>
 >>> vc.tokenize(text)
 ['Ông', 'Nguyễn_Khắc_Chúc', 'đang', 'làm_việc', 'tại', 'Đại_học', 'Quốc_gia', 'Hà_Nội', '.', 'Bà', 'Lan', ',', 'vợ', 'ông', 'Chúc', ',', 'cũng', 'làm_việc', 'tại', 'đây', '.']
 >>> 
 >>> vc.postag(text)
 [{'word': 'Ông', 'tag': 'Nc'}, {'word': 'Nguyễn_Khắc_Chúc', 'tag': 'Np'}, {'word': 'đang', 'tag': 'R'}, {'word': 'làm_việc', 'tag': 'V'}, {'word': 'tại', 'tag': 'E'}, {'word': 'Đại_học', 'tag': 'N'}, {'word': 'Quốc_gia', 'tag': 'N'}, {'word': 'Hà_Nội', 'tag': 'Np'}, {'word': '.', 'tag': 'CH'}, {'word': 'Bà', 'tag': 'Nc'}, {'word': 'Lan', 'tag': 'Np'}, {'word': ',', 'tag': 'CH'}, {'word': 'vợ', 'tag': 'N'}, {'word': 'ông', 'tag': 'Nc'}, {'word': 'Chúc', 'tag': 'Np'}, {'word': ',', 'tag': 'CH'}, {'word': 'cũng', 'tag': 'R'}, {'word': 'làm_việc', 'tag': 'V'}, {'word': 'tại', 'tag': 'E'}, {'word': 'đây', 'tag': 'P'}, {'word': '.', 'tag': 'CH'}]
 >>> 
+```
 
 ## Notes on Memory Usage
 
