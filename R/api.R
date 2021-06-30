@@ -25,7 +25,7 @@ function(req, res, text) {
       tok <<- vietr::vncorenlp$new("wseg")
   }
 
-  list(tokens=tok$tokenize(text))
+  tok$tokenize(text)
 }
 
 
@@ -40,7 +40,7 @@ function(req, res, text) {
   if (is.null(pos)) {
     pos <<- vietr::vncorenlp$new("pos")
   }
-  as.data.frame(t(pos$pos_tag(text)))
+  as.data.frame(t(pos$postag(text)))
 }
 
 #* NER
@@ -52,7 +52,7 @@ function(req, res, text) {
   validate_input(res, text)
 
   if (is.null(ner)) {
-    options(java.parameters = "-Xmx4g")
+    options(java.parameters = "-Xmx5g")
     rJava::J("java.lang.Runtime")$getRuntime()$gc()
     ner <<- vietr::vncorenlp$new("ner")
   }
@@ -68,7 +68,9 @@ function(req, res, text) {
   validate_input(res, text)
 
   if (is.null(dep)) {
+    options(java.parameters = "-Xmx5g")
+    rJava::J("java.lang.Runtime")$getRuntime()$gc()
     dep <<- vietr::vncorenlp$new("parse")
   }
-  as.data.frame(t(dep$dep_parse(text)))
+  as.data.frame(t(dep$depparse(text)))
 }

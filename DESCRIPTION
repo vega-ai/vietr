@@ -1,5 +1,5 @@
 Package: vietr
-Type: NLP
+Type: 
 Title: R Wrapper for VnCoreNLP Word tokenizer (ver 1.1.1)
 Version: 0.1.0
 Author: Le Hoang Anh
@@ -9,7 +9,8 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
-    rJava,
     R6,
     assertthat,
-    plumber
+    httr,
+    plumber,
+    rJava

@@ -1,4 +1,4 @@
 exportPattern("^[[:alpha:]]+")
 import("rJava")
 export("vncorenlp")
-
+export("vnlpc")

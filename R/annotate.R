@@ -37,7 +37,7 @@ vncorenlp <- R6::R6Class('vncorenlp',
          character(1))
     },
 
-    pos_tag = function(sen) {
+    postag = function(sen) {
       ann <- .jnew("vn.pipeline.Annotation", sen)
       private$pipe$annotate(ann)
       words <- ann$getWords() #
@@ -61,7 +61,7 @@ vncorenlp <- R6::R6Class('vncorenlp',
          list(word="", ner=""))
   },
 
-  dep_parse = function(sen) {
+  depparse = function(sen) {
     ann <- .jnew("vn.pipeline.Annotation", sen)
     private$pipe$annotate(ann)
     words <- ann$getWords() #
