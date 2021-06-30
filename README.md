@@ -174,7 +174,7 @@ curl -X POST http://localhost:39000/postag -H "content-type: application/json" -
 
 ### Request annotations using `vnlp` Python client
 
-This package has a sample of python client to make annotation request to vncorenlp above. See `vnlp.py`
+This package has a sample of python client to make annotation request to vncorenlp above. See `vnlpc.py`
 
 ```python
 >>> import vnlpc
