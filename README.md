@@ -111,14 +111,14 @@ $ cp -R models your_r_project_dir
 
 ## Run as service 
 
-1. Start server
+### Start server
 ```bash
 $ cd vietr
 $ ln -s models R/models
 $ R -e 'plumber::plumb(file="R/api.R")$run(port=39000, docs=FALSE)'
 ```
 
-2. Request annotation using curl 
+### Request annotation using curl 
 
 ```bash
 curl -X POST http://localhost:39000/tokenize -H "content-type: application/json" --data "{\"text\": \"Một lãnh đạo Bệnh viện Đa khoa khu vực Thủ Đức đã xác nhận trên Tuổi trẻ online việc, một người đàn ông dương tính với SARS-CoV-2 đang được điều trị tại Bệnh viện Đa khoa khu vực Thủ Đức (phường Linh Trung, TP Thủ Đức, TP.HCM) đã trốn ra ngoài rồi về nhà ở quận 10\"}" 
@@ -132,7 +132,7 @@ curl -X POST http://localhost:39000/postag -H "content-type: application/json" -
 [{"word":"Một","tag":"M"},{"word":"lãnh_đạo","tag":"N"},{"word":"Bệnh_viện","tag":"N"},{"word":"Đa_khoa","tag":"Np"},{"word":"khu_vực","tag":"N"},{"word":"Thủ_Đức","tag":"Np"},{"word":"đã","tag":"R"},{"word":"xác_nhận","tag":"V"},{"word":"trên","tag":"E"},{"word":"Tuổi_trẻ","tag":"N"},{"word":"online","tag":"V"},{"word":"việc","tag":"N"},{"word":",","tag":"CH"},{"word":"một","tag":"M"},{"word":"người","tag":"Nc"},{"word":"đàn_ông","tag":"N"},{"word":"dương_tính","tag":"A"},{"word":"với","tag":"E"},{"word":"SARS-CoV","tag":"Nc"},{"word":"-2","tag":"Np"},{"word":"đang","tag":"R"},{"word":"được","tag":"V"},{"word":"điều_trị","tag":"V"},{"word":"tại","tag":"E"},{"word":"Bệnh_viện","tag":"Np"},{"word":"Đa_khoa","tag":"Np"},{"word":"khu_vực","tag":"N"},{"word":"Thủ_Đức","tag":"Np"},{"word":"(","tag":"CH"},{"word":"phường","tag":"N"},{"word":"Linh_Trung","tag":"Np"},{"word":",","tag":"CH"},{"word":"TP","tag":"Ny"},{"word":"Thủ_Đức","tag":"Np"},{"word":",","tag":"CH"},{"word":"TP.","tag":"Ny"},{"word":"HCM","tag":"Np"},{"word":")","tag":"CH"},{"word":"đã","tag":"R"},{"word":"trốn","tag":"V"},{"word":"ra","tag":"V"},{"word":"ngoài","tag":"N"},{"word":"rồi","tag":"C"},{"word":"về","tag":"V"},{"word":"nhà","tag":"N"},{"word":"ở","tag":"E"},{"word":"quận","tag":"N"},{"word":"10","tag":"M"}]
 ```
 
-3. Request annotations using vncorenlp client 
+### Request annotations using `vnlp` R client 
 
 ```{r}
 > library(vietr)
@@ -172,10 +172,25 @@ curl -X POST http://localhost:39000/postag -H "content-type: application/json" -
 #          "ở"          "E"       "quận"          "N"         "10"          "M" 
 ```
 
-*Note doing NER or Dep Parsing requires memory > 4G*. 
+### Request annotations using `vnlp` Python client
 
-Api server uses default memory of 5G when using ner/depparse and the first request of these kind will take times.
+This package has a sample of python client to make annotation request to vncorenlp above. See `vnlp.py`
 
+>>> import vnlpc
+>>> vc = vnlpc.VNLPClient("http://localhost:39000")
+>>> text = "Ông Nguyễn Khắc Chúc  đang làm việc tại Đại học Quốc gia Hà Nội. Bà Lan, vợ ông Chúc, cũng làm việc tại đây."
+>>> vc.tokenize(text)
+['Ông', 'Nguyễn_Khắc_Chúc', 'đang', 'làm_việc', 'tại', 'Đại_học', 'Quốc_gia', 'Hà_Nội', '.', 'Bà', 'Lan', ',', 'vợ', 'ông', 'Chúc', ',', 'cũng', 'làm_việc', 'tại', 'đây', '.']
+>>> 
+>>> vc.postag(text)
+[{'word': 'Ông', 'tag': 'Nc'}, {'word': 'Nguyễn_Khắc_Chúc', 'tag': 'Np'}, {'word': 'đang', 'tag': 'R'}, {'word': 'làm_việc', 'tag': 'V'}, {'word': 'tại', 'tag': 'E'}, {'word': 'Đại_học', 'tag': 'N'}, {'word': 'Quốc_gia', 'tag': 'N'}, {'word': 'Hà_Nội', 'tag': 'Np'}, {'word': '.', 'tag': 'CH'}, {'word': 'Bà', 'tag': 'Nc'}, {'word': 'Lan', 'tag': 'Np'}, {'word': ',', 'tag': 'CH'}, {'word': 'vợ', 'tag': 'N'}, {'word': 'ông', 'tag': 'Nc'}, {'word': 'Chúc', 'tag': 'Np'}, {'word': ',', 'tag': 'CH'}, {'word': 'cũng', 'tag': 'R'}, {'word': 'làm_việc', 'tag': 'V'}, {'word': 'tại', 'tag': 'E'}, {'word': 'đây', 'tag': 'P'}, {'word': '.', 'tag': 'CH'}]
+>>> 
+
+## Notes on Memory Usage
+
+Note doing NER or Dep Parsing requires memory > 4G.
+
+API server uses default memory of 5G when using ner/depparse and the _first_ request of these kinds will take times.
 
 ## License 
 
