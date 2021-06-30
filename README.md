@@ -34,7 +34,7 @@ $ cp -R models your_r_project_dir
 
 ### Tokenize 
 
-```{r}
+```R
 > library(vietr)
 >
 > v <- vncorenlp$new("wseg")
@@ -49,7 +49,7 @@ $ cp -R models your_r_project_dir
 
 ### PoS Tag
 
-```{r}
+```R
 > library(vietr)
 >
 > v <- vncorenlp$new("pos")
@@ -66,7 +66,7 @@ $ cp -R models your_r_project_dir
 
 ### NER (Memory Greed!!!)
 
-```{r} 
+```R
 > # Clean up mem usage first
 > options(java.parameters = "-Xmx4g")
 > gc()
@@ -89,7 +89,7 @@ $ cp -R models your_r_project_dir
 
 ### Dependence Parse
 
-```{r}
+```R
 > options(java.parameters = "-Xmx4g")
 > gc()
 > rJava::J("java.lang.Runtime")$getRuntime()$gc()
@@ -134,7 +134,7 @@ curl -X POST http://localhost:39000/postag -H "content-type: application/json" -
 
 ### Request annotations using `vnlp` R client 
 
-```{r}
+```R
 > library(vietr)
 >
 > vc <- vnlpc("http://localhost:39000")
