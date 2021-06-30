@@ -2,7 +2,7 @@ import requests
 
 class VNLPClient():
   """
-    >>> vc <- VNLPClient("http://localhost:39000")
+    >>> vc = VNLPClient("http://localhost:39000")
     >>> vc.tokenize("Ông Nguyễn Khắc Chúc  đang làm việc tại Đại học Quốc gia Hà Nội. Bà Lan, vợ ông Chúc, cũng làm việc tại đây.")
   """
   def __init__(self, url):
