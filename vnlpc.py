@@ -25,7 +25,7 @@ class VNLPClient():
     return self._req(self.url_postag, text)
     
   def ner(self, text):
-    return self._req(self.url_depparse, text)
+    return self._req(self.url_ner, text)
     
   def depparse(self, text):
     return self._req(self.url_depparse, text)
