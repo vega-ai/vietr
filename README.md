@@ -15,7 +15,7 @@ This package requires JDK 8+.
 $ sudo apt install openjdk-8-jdk liblzma-dev libpcre2-dev libbz2-dev libcurl4-openssl-dev libxml2-dev libuv1-dev
 $ sudo R CMD javareconf
 $ Rscript -e 'install.packages("rJava")'
-$ Rscript -e 'install.packages(c("R6", "assertthat", "httr", "plumber")'
+$ Rscript -e 'install.packages(c("R6", "assertthat", "httr", "plumber"))'
 ```
 
 ```bash
