@@ -9,12 +9,13 @@
 
 ## Installation
 
-This package requires JDK 1.8+
+This package requires JDK 8+.
 
 ```bash
-$ sudo apt install liblzma-dev libpcre2-dev libbz2-dev
+$ sudo apt install openjdk-8-jdk liblzma-dev libpcre2-dev libbz2-dev libcurl4-openssl-dev libxml2-dev libuv1-dev
 $ sudo R CMD javareconf
 $ Rscript -e 'install.packages("rJava")'
+$ Rscript -e 'install.packages(c("R6", "assertthat", "httr", "plumber")'
 ```
 
 ```bash
@@ -118,7 +119,7 @@ $ ln -s models R/models
 $ R -e 'plumber::plumb(file="R/api.R")$run(port=39000, docs=FALSE)'
 ```
 
-### Request annotation using curl 
+### Request annotations using curl 
 
 ```bash
 curl -X POST http://localhost:39000/tokenize -H "content-type: application/json" --data "{\"text\": \"Một lãnh đạo Bệnh viện Đa khoa khu vực Thủ Đức đã xác nhận trên Tuổi trẻ online việc, một người đàn ông dương tính với SARS-CoV-2 đang được điều trị tại Bệnh viện Đa khoa khu vực Thủ Đức (phường Linh Trung, TP Thủ Đức, TP.HCM) đã trốn ra ngoài rồi về nhà ở quận 10\"}" 
@@ -191,7 +192,7 @@ This package has a sample of python client to make annotation request to vncoren
 
 ## Notes on Memory Usage
 
-Note doing NER or Dep Parsing requires memory > 4G.
+Doing NER or Dep Parsing requires memory > 4G.
 
 API server uses default memory of 5G when using ner/depparse and the _first_ request of these kinds will take times.
 
