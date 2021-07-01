@@ -123,7 +123,7 @@ $ R -e 'plumber::plumb(file="R/api.R")$run(port=39000, docs=FALSE)'
 ```bash
 curl -X POST http://localhost:39000/tokenize -H "content-type: application/json" --data "{\"text\": \"Một lãnh đạo Bệnh viện Đa khoa khu vực Thủ Đức đã xác nhận trên Tuổi trẻ online việc, một người đàn ông dương tính với SARS-CoV-2 đang được điều trị tại Bệnh viện Đa khoa khu vực Thủ Đức (phường Linh Trung, TP Thủ Đức, TP.HCM) đã trốn ra ngoài rồi về nhà ở quận 10\"}" 
 
-{"tokens":["Một","lãnh_đạo","Bệnh_viện","Đa_khoa","khu_vực","Thủ_Đức","đã","xác_nhận","trên","Tuổi_trẻ","online","việc",",","một","người","đàn_ông","dương_tính","với","SARS-CoV","-2","đang","được","điều_trị","tại","Bệnh_viện","Đa_khoa","khu_vực","Thủ_Đức","(","phường","Linh_Trung",",","TP","Thủ_Đức",",","TP.","HCM",")","đã","trốn","ra","ngoài","rồi","về","nhà","ở","quận","10"]}
+["Một","lãnh_đạo","Bệnh_viện","Đa_khoa","khu_vực","Thủ_Đức","đã","xác_nhận","trên","Tuổi_trẻ","online","việc",",","một","người","đàn_ông","dương_tính","với","SARS-CoV","-2","đang","được","điều_trị","tại","Bệnh_viện","Đa_khoa","khu_vực","Thủ_Đức","(","phường","Linh_Trung",",","TP","Thủ_Đức",",","TP.","HCM",")","đã","trốn","ra","ngoài","rồi","về","nhà","ở","quận","10"]
 ```
 
 ```bash
