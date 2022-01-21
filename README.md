@@ -7,6 +7,33 @@
 
 `vietr` is a wrapper of VNCoreNLP.
 
+## Quick start using docker 
+
+```bash
+$ git clone https://github.com/vega-ai/vietr.git 
+$ cd vietr
+$ docker build -t vietr .
+$ docker run -d -p 39000:8000 --rm vietr
+```
+
+Use sample `vnlpc.py` client 
+
+```bash
+$ cd vietr
+$ python
+```
+
+```python
+>>> import vnlpc
+>>> vc = vnlpc.VNLPClient("http://localhost:39000")
+>>> text = "Ông Nguyễn Khắc Chúc  đang làm việc tại Đại học Quốc gia Hà Nội. Bà Lan, vợ ông Chúc, cũng làm việc tại đây."
+>>> vc.tokenize(text)
+['Ông', 'Nguyễn_Khắc_Chúc', 'đang', 'làm_việc', 'tại', 'Đại_học', 'Quốc_gia', 'Hà_Nội', '.', 'Bà', 'Lan', ',', 'vợ', 'ông', 'Chúc', ',', 'cũng', 'làm_việc', 'tại', 'đây', '.']
+```
+
+For more API usages see Examples bellow.
+
+
 ## Installation
 
 This package requires JDK 8+.
